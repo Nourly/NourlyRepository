@@ -23,6 +23,7 @@ public class Merge {
         sort(a, lo, mid);
         sort(a, mid + 1, hi);
 
+        merge(a, lo, mid, hi);
 
     }
 
@@ -33,15 +34,13 @@ public class Merge {
         int p2 = mid + 1;
 
         //遍历，移动指针p1和指针p2，比较对应的值，找出小的那一个，放到辅助数组对应的索引中
-        while (p1 <= mid || p2 <= hi) {
-            if (p1 > p2) {
-                if (less(a, p1, p2))
-                    assist[i++] = a[p1++];
-            } else {
+        while (p1 <= mid && p2 <= hi) {
+            if (less(a, p1, p2))
+                assist[i++] = a[p1++];
+            else
                 assist[i++] = a[p2++];
-            }
-        }
 
+        }
 
         //遍历，如果p1没有走完，那么顺序移动p1指针，把对应的元素放在辅助数组相应的地方
         while (p1 <= mid) {
