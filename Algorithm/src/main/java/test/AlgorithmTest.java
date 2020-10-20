@@ -9,6 +9,8 @@ public class AlgorithmTest {
 
     public static void main(String args[]) {
 
+        //时间复杂度 开始计时
+        long start = System.currentTimeMillis();
         /**一般排序**/
         //冒泡排序
         // Bubble.sort(TestData.integerList);
@@ -16,11 +18,19 @@ public class AlgorithmTest {
         // Insertion.sort(TestData.integerList);
         // 选择排序
         // Selection.sort(TestData.integerList);
+
+        /**高级排序**/
+        //希尔排序
+        // Shell.sort(TestData.integerList);
         //归并排序
         Merge.sort(TestData.integerList);
 
-        /**高级排序**/
-        Shell.sort(TestData.integerList);
-        System.out.println(Arrays.toString(TestData.integerList));
+
+        //时间复杂度  结束计时
+        long end = System.currentTimeMillis();
+
+        System.out.println("输出结果为：" + Arrays.toString(TestData.integerList));
+
+        System.out.println("时间为：" + (end - start));
     }
 }
