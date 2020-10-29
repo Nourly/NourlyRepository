@@ -20,12 +20,12 @@ public class AlgorithmTest {
         // Selection.sort(TestData.integerList);
 
         /**高级排序**/
-        //希尔排序
+        // 希尔排序
         // Shell.sort(TestData.integerList);
-        //归并排序
-        Merge.sort(TestData.integerList);
-
-
+        // 归并排序
+        // Merge.sort(TestData.integerList);
+        // 快速排序
+        Quick.sort(TestData.integerList);
         //时间复杂度  结束计时
         long end = System.currentTimeMillis();
 
