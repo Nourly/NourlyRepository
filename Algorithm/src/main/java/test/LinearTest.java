@@ -6,7 +6,7 @@ public class LinearTest {
 
     public static void main(String[] args) {
         //创建顺序表
-        SequenceList<String> s1 = new SequenceList<>(10);
+        SequenceList<String> s1 = new SequenceList<>(2);
 
         //测试插入
         s1.insert("1");
@@ -14,6 +14,10 @@ public class LinearTest {
         s1.insert("3");
         s1.insert("4");
         s1.insert("5");
+
+        for (String s : s1) {
+            System.out.println(s);
+        }
 
         //测试获取
         String getResult = s1.get(1);
