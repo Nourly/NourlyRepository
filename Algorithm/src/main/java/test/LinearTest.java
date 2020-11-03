@@ -2,6 +2,9 @@ package test;
 
 import linear.SequenceList;
 
+/**
+ * @author Nour
+ */
 public class LinearTest {
 
     public static void main(String[] args) {

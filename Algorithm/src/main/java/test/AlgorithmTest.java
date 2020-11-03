@@ -1,13 +1,16 @@
 package test;
 
-import Data.TestData;
+import data.TestData;
 import sort.*;
 
 import java.util.Arrays;
 
+/**
+ * @author Nour
+ */
 public class AlgorithmTest {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         //时间复杂度 开始计时
         long start = System.currentTimeMillis();

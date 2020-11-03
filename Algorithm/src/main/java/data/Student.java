@@ -1,6 +1,8 @@
-package Data;
+package data;
 
-
+/**
+ * @author Nour
+ */
 public class Student implements Comparable<Student>{
 
     private String username;

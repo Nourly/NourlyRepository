@@ -1,5 +1,8 @@
 package sort;
 
+/**
+ * @author Nour
+ */
 public class Shell {
 
     public static void sort(Comparable a[]){

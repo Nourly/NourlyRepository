@@ -1,7 +1,10 @@
 package test;
 
-import Data.Student;
+import data.Student;
 
+/**
+ * @author Nour
+ */
 public class test {
 
     public static void main(String[] args) {

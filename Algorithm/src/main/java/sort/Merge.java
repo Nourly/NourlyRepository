@@ -1,5 +1,8 @@
 package sort;
 
+/**
+ * @author Nour
+ */
 public class Merge {
 
     public static Comparable[] assist;
@@ -35,10 +38,11 @@ public class Merge {
 
         //遍历，移动指针p1和指针p2，比较对应的值，找出小的那一个，放到辅助数组对应的索引中
         while (p1 <= mid && p2 <= hi) {
-            if (less(a, p1, p2))
+            if (less(a, p1, p2)) {
                 assist[i++] = a[p1++];
-            else
+            } else {
                 assist[i++] = a[p2++];
+            }
 
         }
 
