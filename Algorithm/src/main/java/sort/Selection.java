@@ -1,9 +1,13 @@
 package sort;
 
+/**
+ * @author Nour
+ */
 public class Selection {
 
     public static void sort(Comparable[] a) {
-        for (int i = 0; i <= a.length - 2; i++) {
+        int two = 2;
+        for (int i = 0; i <= a.length - two; i++) {
             //定义一个变量记录最小元素的索引，默认为参与排序的第一个元素所在的位置
             int minIndex = i;
             for (int j = i + 1; j < a.length; j++) {
