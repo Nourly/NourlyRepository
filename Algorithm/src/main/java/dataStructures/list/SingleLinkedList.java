@@ -1,5 +1,7 @@
 package dataStructures.list;
 
+import java.util.Stack;
+
 /**
  * @author 69035
  * @date 2020/12/13
@@ -24,6 +26,111 @@ public class SingleLinkedList {
         singledList.update(hero2);
         singledList.del(4);
         singledList.list();
+
+        System.out.println("测试逆序打印单链表");
+        reversePrint(singledList.getHead());
+
+        System.out.println("测试链表反转");
+        HeroNode heroNode = reverseNode(singledList.getHead());
+        while (heroNode != null) {
+            System.out.println(heroNode.toString());
+            heroNode = heroNode.next;
+        }
+
+
+    }
+
+
+    /**
+     * 查找单链表中的倒数第k个节点【新浪】
+     * 思路
+     * 1.编写一个方法，接收head节点，同时接收一个index
+     * 2.index 表示倒数第index个节点
+     * 3.先把链表从头到尾编辑一下,得到链表的总长度
+     * 4.得到size后，我们从链表的第一个开始遍历(size-index)个就可以了
+     * 5.如果找到了就返回该节点，否则返回空
+     */
+    public static HeroNode findLastIndexNode(HeroNode head, int index) {
+        //判断链表为空返货null
+        if (head.next == null) {
+            return null;
+        }
+        //第一次遍历得到链表的长度
+        int size = getLength(head);
+        //第二次遍历到size-index个
+        if (index <= 0) {
+            return null;
+        }
+        HeroNode temp = head.next;
+        for (int i = 0; i < size - index; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    /**
+     * 翻转链表【腾讯】
+     * 思路：建立一个辅助翻转链表，遍历原有的链表，辅助变量每次都临时保存下翻转变量头节点的下一个节点，然后让翻转变量头节点的下一个节点变成比当前节点，然后将辅助变量的节点拼接到当前节点即可。
+     *
+     * @param head
+     * @return
+     */
+    public static HeroNode reverseNode(HeroNode head) {
+        //没有元素或者只有一个元素则不需要移动
+        if (head.next == null || head.next.next == null) {
+            return head;
+        }
+        HeroNode temp = head.next;
+        HeroNode next = null;
+        HeroNode reverseNode = new HeroNode(0, "", "");
+        while (temp != null) {
+            //先保存当前节点的下一个节点，后面需要使用
+            next = temp.next;
+            //将temp的下一个节点指向新链表的最前端
+            temp.next = reverseNode.next;
+            reverseNode.next = temp;
+            temp = next;
+        }
+        //将head.next指向reverseNode.next
+        head.next = reverseNode.next;
+        return reverseNode;
+    }
+
+    public static void reversePrint(HeroNode head) {
+        if (head.next == null) {
+            System.out.println("空链表无法打印");
+            return;
+        }
+        //创建一个栈，将各个节点压入栈中
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode temp = head.next;
+        //将链表的所有节点压入栈中
+        while (temp != null) {
+            stack.push(temp);
+            temp = temp.next;
+        }
+        //将栈中的节点进行打印
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());
+        }
+    }
+
+    /**
+     * @param head 链表的头节点
+     * @return
+     */
+    public static int getLength(HeroNode head) {
+        if (head.next == null) {
+            return 0;
+        }
+        int length = 0;
+        //定义一个辅助变量
+        HeroNode cur = head.next;
+        while (cur != null) {
+            length++;
+            cur = cur.next;
+        }
+        return length;
     }
 }
 
@@ -33,6 +140,14 @@ class SingledList {
      * 先定义一个头节点，头节点不要发生变化,不放任何具体数据
      */
     private HeroNode head = new HeroNode(0, "", "");
+
+    public HeroNode getHead() {
+        return head;
+    }
+
+    public void setHead(HeroNode head) {
+        this.head = head;
+    }
 
     /**
      * 添加节点到单向链表
@@ -156,15 +271,15 @@ class SingledList {
             if (temp.next == null) {
                 break;
             }
-            if(temp.next.no == no){
+            if (temp.next.no == no) {
                 flag = true;
                 break;
             }
             temp = temp.next;
         }
-        if(flag){
+        if (flag) {
             temp.next = temp.next.next;
-        }else{
+        } else {
             System.out.println("要删除的节点不存在");
         }
     }
