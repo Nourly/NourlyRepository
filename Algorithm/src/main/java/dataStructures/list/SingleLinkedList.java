@@ -1,5 +1,6 @@
 package dataStructures.list;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -7,6 +8,8 @@ import java.util.Stack;
  * @date 2020/12/13
  */
 public class SingleLinkedList {
+    private static Object HeroNode;
+
     public static void main(String[] args) {
         //测试
         //先创建节点
@@ -20,6 +23,17 @@ public class SingleLinkedList {
         singledList.add(hero2);
         singledList.add(hero3);
         singledList.add(hero4);
+        SingledList singledList2 = new SingledList();
+        singledList2.add(new HeroNode(1, "呀哈哈1", "呀哈哈1"));
+        singledList2.add(new HeroNode(2, "呀哈哈2", "呀哈哈1"));
+        singledList2.add(new HeroNode(3, "呀哈哈3", "呀哈哈1"));
+        singledList2.add(new HeroNode(6, "呀哈哈6", "呀哈哈1"));
+        singledList2.add(new HeroNode(7, "呀哈哈7", "呀哈哈1"));
+        HeroNode comBin = combinNode(singledList.getHead(), singledList2.getHead());
+        SingledList comBinList = new SingledList();
+        System.out.println("测试合并打印");
+        comBinList.add(comBin);
+        comBinList.list();
         singledList.addByNo(myHero);
         hero2.name = "卢本伟";
         hero2.nickname = "不开挂";
@@ -96,6 +110,12 @@ public class SingleLinkedList {
         return reverseNode;
     }
 
+    /**
+     * 从头到尾打印单链表【百度面试题】
+     * 思路：用栈即可
+     *
+     * @param head
+     */
     public static void reversePrint(HeroNode head) {
         if (head.next == null) {
             System.out.println("空链表无法打印");
@@ -114,6 +134,52 @@ public class SingleLinkedList {
             System.out.println(stack.pop());
         }
     }
+
+    /**
+     * 合并两个链表，序号相同1就在前面
+     * 思路：递归
+     *
+     * @param heroNode1
+     * @param heroNode2
+     * @return
+     */
+    public static HeroNode combinNode(HeroNode heroNode1, HeroNode heroNode2) {
+        HeroNode combinNode = new HeroNode(0, "", "");
+        comBin(combinNode, heroNode1.next, heroNode2.next);
+        return combinNode;
+    }
+
+    /**
+     * 使用递归合并链表，并且返回合并链表comBinNode
+     *
+     * @param comBinNode
+     * @param node1
+     * @param node2
+     * @return
+     */
+    private static HeroNode comBin(HeroNode comBinNode, HeroNode node1, HeroNode node2) {
+        //如果1、2都为空
+        if (node1 == null || node2 == null) {
+            if (node1 != null) {
+                comBinNode.next = node1;
+            } else if (node2 != null) {
+                comBinNode.next = node2;
+            }
+            return comBinNode;
+        }
+        //将节点1拼接到comBinNode中
+        HeroNode temp = comBinNode;
+        temp.next = node1;
+        temp = temp.next;
+        //开始遍历2，并且和1进行比较
+        while (node2 != null && (node1.no > node2.no)) {
+            temp.next = node2;
+            temp = temp.next;
+            node2 = node2.next;
+        }
+        return comBin(temp, node2, node1.next);
+    }
+
 
     /**
      * @param head 链表的头节点
