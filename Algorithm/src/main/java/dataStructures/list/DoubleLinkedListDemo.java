@@ -7,6 +7,36 @@ package dataStructures.list;
 public class DoubleLinkedListDemo {
 
     public static void main(String[] args) {
+        //测试
+        //先创建节点
+        HeroNode2 hero1 = new HeroNode2(1, "松江", "及时雨");
+        HeroNode2 hero2 = new HeroNode2(2, "卢俊义", "玉麒麟");
+        HeroNode2 hero3 = new HeroNode2(3, "吴用", "智多星");
+        HeroNode2 hero4 = new HeroNode2(4, "公孙胜", "入云龙");
+        HeroNode2 myHero = new HeroNode2(1, "尼玛", "王尼玛");
+        DoubleLinkedList doubleLinkedList = new DoubleLinkedList();
+        doubleLinkedList.add(hero1);
+        doubleLinkedList.add(hero2);
+        doubleLinkedList.add(hero3);
+        doubleLinkedList.add(hero4);
+
+        doubleLinkedList.list();
+        //修改
+        HeroNode2 newHeroNode = new HeroNode2(4, "公公", "改名后");
+        doubleLinkedList.update(newHeroNode);
+        System.out.println("修改后的链表情况");
+        doubleLinkedList.list();
+
+        //删除
+        doubleLinkedList.del(4);
+        System.out.println("删除后的链表情况");
+        doubleLinkedList.list();
+
+        //双向链表的第二种添加方式，按照编号顺序
+        HeroNode2 newHeroNode2 = new HeroNode2(4, "添加", "添加结果");
+        doubleLinkedList.addByNo(newHeroNode2, doubleLinkedList.getHead());
+        System.out.println("根据序号添加");
+        doubleLinkedList.list();
 
     }
 }
@@ -67,6 +97,52 @@ class DoubleLinkedList {
         //构成一个双向链表
         temp.next = heroNode;
         heroNode.pre = temp;
+    }
+
+    public void addByNo(HeroNode2 heroNode2, HeroNode2 addNode) {
+        if (heroNode2 == null) {
+            return;
+        }
+        int no = heroNode2.no;
+        while (addNode.next != null) {
+            HeroNode2 next = addNode.next;
+            int curNo = addNode.no;
+            int nextNo = next.no;
+            if (curNo == no || nextNo == no) {
+                System.out.println("已经存在该编号的节点");
+                break;
+            }
+            //如果curNo>no则将no拼接到curNo上
+            if (curNo > no) {
+                HeroNode2 pre = addNode.pre;
+                addNode.pre = heroNode2;
+                heroNode2.next = addNode;
+                if (pre != null) {
+                    pre.next = heroNode2;
+                    heroNode2.pre = pre;
+                }
+                break;
+
+            }
+            //如果curNo<no<nextNo
+            if (no < nextNo) {
+                addNode.next = heroNode2;
+                heroNode2.pre = addNode;
+                heroNode2.next = next;
+                next.pre = heroNode2;
+                break;
+            }
+
+            if (addNode.next.next == null) {
+                addNode.next.next = heroNode2;
+                heroNode2.pre = addNode.next;
+                break;
+            }
+
+            addNode = addNode.next;
+
+
+        }
     }
 
     /**
